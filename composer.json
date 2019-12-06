@@ -1,6 +1,6 @@
 {
-  "name": "elifbyte/module-admin-generator",
-  "description": "Laravel 5 CRUD generator with ndiwart module for brackets/craftable",
+  "name": "elifbyte/admin-module-generator",
+  "description": "Laravel 5 CRUD generator with nwidart/module for brackets/craftable",
   "keywords": [
     "generator",
     "make",
@@ -14,7 +14,7 @@
   "type": "project",
   "authors": [
     {
-      "name": "Aviw Baihaqy",
+      "name": "Aviq Baihaqy",
       "email": "aviq.baihaqy@gmail.com",
       "homepage": "https://www.elifbyte.com",
       "role": "Developer"
