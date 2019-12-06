@@ -1,0 +1,56 @@
+{
+  "name": "elifbyte/module-admin-generator",
+  "description": "Laravel 5 CRUD generator with ndiwart module for brackets/craftable",
+  "keywords": [
+    "generator",
+    "make",
+    "crud",
+    "admin",
+    "cms",
+    "laravel",
+    "craftable"
+  ],
+  "license": "MIT",
+  "type": "project",
+  "authors": [
+    {
+      "name": "Aviw Baihaqy",
+      "email": "aviq.baihaqy@gmail.com",
+      "homepage": "https://www.elifbyte.com",
+      "role": "Developer"
+    }
+  ],
+  "version": "0.1.0",
+  "minimum-stability": "dev",
+  "require": {
+    "php": "^7.2",
+    "illuminate/support": "~6.0",
+    "illuminate/console": "~6.0",
+    "doctrine/dbal": "^2.6.0",
+    "laravel/helpers": "~1.0",
+    "nwidart/laravel-modules": "^6.2"
+  },
+  "require-dev": {
+    "orchestra/testbench": "~4.0",
+    "mockery/mockery": "^1.0",
+    "phpunit/phpunit": "~8.0"
+  },
+  "autoload": {
+    "classmap": [],
+    "psr-4": {
+      "Elifbyte\\AdminGenerator\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Elifbyte\\AdminGenerator\\Tests\\": "tests/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Elifbyte\\AdminGenerator\\AdminGeneratorServiceProvider"
+      ]
+    }
+  }
+}
