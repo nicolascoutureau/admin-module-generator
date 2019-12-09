@@ -112,7 +112,7 @@ class ViewIndex extends ViewGenerator
             $this->info('Appending Listing to ' . $indexJsPath . ' finished');
         }
         if ($this->appendIfNotAlreadyAppended($bootstrapJsPath, "import './" . $this->modelJSName . "';" . PHP_EOL)) {
-            $this->info('Appending ' . $this->modelJSName . '/index.js to ' . $bootstrapJsPath . ' finished');
+            $this->info('Appending ' . $this->modelJSName . ' to ' . $bootstrapJsPath . ' finished');
         };
         if ($this->appendIfNotAlreadyAppended($mainJsPath, "import '@" . $this->moduleName . "';" . PHP_EOL)) {
             $this->info('Appending ' . $mainJsPath . '/index.js finished');
@@ -131,7 +131,7 @@ class ViewIndex extends ViewGenerator
     protected function buildView()
     {
 
-        return view('elifbyte/module-admin-generator::' . $this->view, [
+        return view('elifbyte/admin-module-generator::' . $this->view, [
             'moduleName' => Str::lower($this->moduleName),
             'modelBaseName' => $this->modelBaseName,
             'modelRouteAndViewName' => $this->modelRouteAndViewName,
@@ -175,7 +175,7 @@ class ViewIndex extends ViewGenerator
 
     protected function buildListingJs()
     {
-        return view('elifbyte/module-admin-generator::' . $this->viewJs, [
+        return view('elifbyte/admin-module-generator::' . $this->viewJs, [
             'modelViewsDirectory' => $this->modelViewsDirectory,
             'modelJSName' => $this->modelJSName,
         ])->render();

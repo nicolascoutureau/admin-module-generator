@@ -34,7 +34,7 @@ class DestroyRequest extends ClassGenerator {
 
     protected function buildClass() {
 
-        return view('elifbyte/module-admin-generator::destroy-request', [
+        return view('elifbyte/admin-module-generator::destroy-request', [
             'classNamespace' => $this->classNamespace,
             'modelBaseName' => $this->modelBaseName,
             'modelDotNotation' => $this->modelDotNotation,

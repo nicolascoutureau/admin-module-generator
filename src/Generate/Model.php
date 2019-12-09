@@ -56,8 +56,10 @@ class Model extends ClassGenerator
 
     protected function buildClass()
     {
+        //dd($this->getPrimaryKey($this->tableName));
+        //dd($this->readColumnsFromTable($this->tableName));
 
-        return view('elifbyte/module-admin-generator::' . $this->view, [
+        return view('elifbyte/admin-module-generator::' . $this->view, [
             'modelBaseName' => $this->classBaseName,
             'modelNameSpace' => $this->classNamespace,
 
@@ -68,8 +70,13 @@ class Model extends ClassGenerator
                 return $column['type'] == "datetime" || $column['type'] == "date";
             })->pluck('name'),
             'fillable' => $this->readColumnsFromTable($this->tableName)->filter(function ($column) {
-                return !in_array($column['name'], ['id', 'created_at', 'updated_at', 'deleted_at', 'remember_token']);
+                //$ignored = ['id','created_at', 'updated_at', 'deleted_at', 'remember_token'];
+                //if (($column['is_primary'] == true) && ($column['type'] != 'string')){
+                //    $ignored[] = 'id';
+                //}
+                return !in_array($column['name'], ['id','created_at', 'updated_at', 'deleted_at', 'remember_token']);
             })->pluck('name'),
+
             'hidden' => $this->readColumnsFromTable($this->tableName)->filter(function ($column) {
                 return in_array($column['name'], ['password', 'remember_token']);
             })->pluck('name'),
@@ -82,6 +89,10 @@ class Model extends ClassGenerator
             'hasSoftDelete' => $this->readColumnsFromTable($this->tableName)->filter(function ($column) {
                     return $column['name'] == "deleted_at";
                 })->count() > 0,
+            'hasUuid' => $this->readColumnsFromTable($this->tableName)->filter(function ($column) {
+                    return ($column['is_primary'] == true) && ($column['type'] == 'string');
+                })->count() > 0,
+
             'resource' => $this->resource,
 
             'relations' => $this->relations,

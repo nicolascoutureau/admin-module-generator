@@ -30,7 +30,7 @@
 
                     <div class="card-body">
 
-                        @include('elifbyte/module-admin-generator::form')
+                        @include('elifbyte/admin-module-generator::form')
 
                     </div>
 

@@ -31,6 +31,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 @endif
 @if($translatable->count() > 0)use Brackets\Translatable\Traits\HasTranslations;
 @endif
+@if($hasUuid)use Elifbyte\AdminGenerator\Generate\Traits\Uuid;
+@endif
 
 class {{ $modelBaseName }} extends Model
 {
@@ -41,6 +43,11 @@ class {{ $modelBaseName }} extends Model
 @endif
 @if($translatable->count() > 0)use HasTranslations;
 @endif
+@if($hasUuid)use Uuid;
+
+public $incrementing = false;
+@endif
+
 @if($fillable)@foreach($fillable as $fillableColumn)
 @if($fillableColumn === "created_by_admin_user_id")use CreatedByAdminUserTrait;
 @elseif($fillableColumn === "updated_by_admin_user_id")    use UpdatedByAdminUserTrait;

@@ -26,7 +26,7 @@
         return !in_array($column['name'], ['password']);
     });
 @endphp
-                        @include('elifbyte/module-admin-generator::templates.profile.password.form')
+                        @include('elifbyte/admin-module-generator::templates.profile.password.form')
 
                     </div>
 

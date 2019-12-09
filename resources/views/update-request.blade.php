@@ -18,7 +18,7 @@ namespace {{ $classNamespace }};
 @if($containsPublishedAtColumn)
 use Carbon\Carbon;
 @endif
-@if($translatable->count() > 0)use Elifbyte\Translatable\TranslatableFormRequest;
+@if($translatable->count() > 0)use Brackets\Translatable\TranslatableFormRequest;
 @else
 use Illuminate\Foundation\Http\FormRequest;
 @endif

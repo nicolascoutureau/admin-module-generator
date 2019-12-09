@@ -90,7 +90,7 @@ class Controller extends ClassGenerator
     {
         //dd($this->modelFullName, $this->classFullName, $this->moduleName, $this->moduleNamespace);
 
-        return view('elifbyte/module-admin-generator::' . $this->view, [
+        return view('elifbyte/admin-module-generator::' . $this->view, [
             'moduleNamespace' => $this->moduleNamespace,
             'moduleName' => Str::lower($this->moduleName),
             'controllerBaseName' => $this->classBaseName,

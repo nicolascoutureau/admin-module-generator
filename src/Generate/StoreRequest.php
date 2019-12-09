@@ -52,7 +52,7 @@ class StoreRequest extends ClassGenerator {
 
     protected function buildClass() {
 
-        return view('elifbyte/module-admin-generator::'.$this->view, [
+        return view('elifbyte/admin-module-generator::'.$this->view, [
             'classNamespace' => $this->classNamespace,
             'modelBaseName' => $this->modelBaseName,
             'modelDotNotation' => $this->modelDotNotation,

@@ -29,7 +29,7 @@
         return in_array($column['name'], ['password', 'activated', 'forbidden']);
     });
 @endphp
-                        @include('elifbyte/module-admin-generator::templates.profile.form')
+                        @include('elifbyte/admin-module-generator::templates.profile.form')
 
                     </div>
 

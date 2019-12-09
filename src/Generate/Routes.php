@@ -64,7 +64,7 @@ class Routes extends FileAppender {
 
     protected function buildClass() {
 
-        return view('elifbyte/module-admin-generator::'.$this->view, [
+        return view('elifbyte/admin-module-generator::'.$this->view, [
             'controllerPartiallyFullName' => $this->controllerWithNamespaceFromDefault,
             'modelVariableName' => $this->modelVariableName,
             'modelViewsDirectory' => $this->modelViewsDirectory,

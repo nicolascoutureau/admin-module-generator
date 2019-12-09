@@ -194,7 +194,7 @@ class ViewForm extends ViewGenerator {
 
     protected function buildForm() {
 
-        return view('elifbyte/module-admin-generator::'.$this->form, [
+        return view('elifbyte/admin-module-generator::'.$this->form, [
             'moduleName' => Str::lower($this->moduleName),
             'modelBaseName' => $this->modelBaseName,
             'modelRouteAndViewName' => $this->modelRouteAndViewName,
@@ -215,7 +215,7 @@ class ViewForm extends ViewGenerator {
 
     protected function buildFormRight() {
 
-        return view('elifbyte/module-admin-generator::'.$this->formRight, [
+        return view('elifbyte/admin-module-generator::'.$this->formRight, [
             'moduleName' => Str::lower($this->moduleName),
             'modelBaseName' => $this->modelBaseName,
             'modelRouteAndViewName' => $this->modelRouteAndViewName,
@@ -237,7 +237,7 @@ class ViewForm extends ViewGenerator {
 
     protected function buildCreate() {
 
-        return view('elifbyte/module-admin-generator::'.$this->create, [
+        return view('elifbyte/admin-module-generator::'.$this->create, [
             'moduleName' => Str::lower($this->moduleName),
             'modelBaseName' => $this->modelBaseName,
             'modelRouteAndViewName' => $this->modelRouteAndViewName,
@@ -260,7 +260,7 @@ class ViewForm extends ViewGenerator {
 
     protected function buildEdit() {
 
-        return view('elifbyte/module-admin-generator::'.$this->edit, [
+        return view('elifbyte/admin-module-generator::'.$this->edit, [
             'moduleName' => Str::lower($this->moduleName),
             'modelBaseName' => $this->modelBaseName,
             'modelRouteAndViewName' => $this->modelRouteAndViewName,
@@ -284,7 +284,7 @@ class ViewForm extends ViewGenerator {
     }
 
     protected function buildFormJs() {
-        return view('elifbyte/module-admin-generator::'.$this->formJs, [
+        return view('elifbyte/admin-module-generator::'.$this->formJs, [
             'modelViewsDirectory' => $this->modelViewsDirectory,
             'modelJSName' => $this->modelJSName,
 

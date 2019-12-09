@@ -158,7 +158,7 @@ class ViewFullForm extends ViewGenerator
     protected function buildForm()
     {
 
-        return view('elifbyte/module-admin-generator::' . $this->view, [
+        return view('elifbyte/admin-module-generator::' . $this->view, [
             'moduleName' => Str::lower($this->moduleName),
             'modelBaseName' => $this->modelBaseName,
             'modelVariableName' => $this->modelVariableName,
@@ -183,7 +183,7 @@ class ViewFullForm extends ViewGenerator
 
     protected function buildFormJs()
     {
-        return view('elifbyte/module-admin-generator::' . $this->viewJs, [
+        return view('elifbyte/admin-module-generator::' . $this->viewJs, [
             'modelJSName' => $this->formJsRelativePath,
 
             'columns' => $this->getVisibleColumns($this->tableName, $this->modelVariableName),

@@ -34,7 +34,7 @@ class IndexRequest extends ClassGenerator {
 
     protected function buildClass() {
 
-        return view('elifbyte/module-admin-generator::index-request', [
+        return view('elifbyte/admin-module-generator::index-request', [
             'classNamespace' => $this->classNamespace,
             'modelBaseName' => $this->modelBaseName,
             'modelDotNotation' => $this->modelDotNotation,

@@ -36,7 +36,7 @@ class BulkDestroyRequest extends ClassGenerator {
 
     protected function buildClass() {
 
-        return view('elifbyte/module-admin-generator::bulk-destroy-request', [
+        return view('elifbyte/admin-module-generator::bulk-destroy-request', [
             'classNamespace' => $this->classNamespace,
             'modelBaseName' => $this->modelBaseName,
             'modelDotNotation' => $this->modelDotNotation,

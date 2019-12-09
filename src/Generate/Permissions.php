@@ -82,7 +82,7 @@ class Permissions extends ClassGenerator {
 
     protected function buildClass() {
 
-        return view('elifbyte/module-admin-generator::permissions', [
+        return view('elifbyte/admin-module-generator::permissions', [
             'modelBaseName' => $this->modelBaseName,
             'modelDotNotation' => $this->modelDotNotation,
             'className' => $this->generateClassNameFromTable($this->tableName),
