@@ -28,6 +28,11 @@ class Model extends ClassGenerator
     protected $view = 'model';
 
     /**
+     * @var bool
+     */
+    protected $translatable = false;
+
+    /**
      * Execute the console command.
      *
      * @return mixed
@@ -35,6 +40,7 @@ class Model extends ClassGenerator
     public function handle()
     {
         $force = $this->option('force');
+        $translatable = $this->option('translatable');
 
         //TODO check if exists
         //TODO make global for all generator
@@ -47,10 +53,25 @@ class Model extends ClassGenerator
             $this->setBelongToManyRelation($belongsToMany);
         }
 
+        if (!empty($belongsTo = $this->option('belongs-to'))) {
+            $this->setBelongToRelation($belongsTo);
+        }
+
+        if (!empty($hasMany = $this->option('has-many'))) {
+            $this->setHasRelation($hasMany, 'Many');
+        }
+
+        if (!empty($hasOne = $this->option('has-one'))) {
+            $this->setHasRelation($hasOne, 'One');
+        }
+
         if ($this->generateClass($force)) {
             $this->info('Generating ' . $this->classFullName . ' finished');
         }
 
+        if ($translatable) {
+            $this->translatable = true;
+        }
         // TODO think if we should use ide-helper:models ?
     }
 
@@ -58,6 +79,7 @@ class Model extends ClassGenerator
     {
         //dd($this->getPrimaryKey($this->tableName));
         //dd($this->readColumnsFromTable($this->tableName));
+        //dd($this->relations);
 
         return view('elifbyte/admin-module-generator::' . $this->view, [
             'modelBaseName' => $this->classBaseName,
@@ -70,28 +92,25 @@ class Model extends ClassGenerator
                 return $column['type'] == "datetime" || $column['type'] == "date";
             })->pluck('name'),
             'fillable' => $this->readColumnsFromTable($this->tableName)->filter(function ($column) {
-                //$ignored = ['id','created_at', 'updated_at', 'deleted_at', 'remember_token'];
-                //if (($column['is_primary'] == true) && ($column['type'] != 'string')){
-                //    $ignored[] = 'id';
-                //}
-                return !in_array($column['name'], ['id','created_at', 'updated_at', 'deleted_at', 'remember_token']);
+                $ignored = ['id', 'created_at', 'updated_at', 'deleted_at', 'remember_token'];
+                return !in_array($column['name'], $ignored);
             })->pluck('name'),
 
             'hidden' => $this->readColumnsFromTable($this->tableName)->filter(function ($column) {
                 return in_array($column['name'], ['password', 'remember_token']);
             })->pluck('name'),
             'translatable' => $this->readColumnsFromTable($this->tableName)->filter(function ($column) {
-                return $column['type'] == "json";
+                return ($column['type'] == "json") && ($this->translatable);
             })->pluck('name'),
             'timestamps' => $this->readColumnsFromTable($this->tableName)->filter(function ($column) {
-                    return in_array($column['name'], ['created_at', 'updated_at']);
-                })->count() > 0,
+                return in_array($column['name'], ['created_at', 'updated_at']);
+            })->count() > 0,
             'hasSoftDelete' => $this->readColumnsFromTable($this->tableName)->filter(function ($column) {
-                    return $column['name'] == "deleted_at";
-                })->count() > 0,
+                return $column['name'] == "deleted_at";
+            })->count() > 0,
             'hasUuid' => $this->readColumnsFromTable($this->tableName)->filter(function ($column) {
-                    return ($column['is_primary'] == true) && ($column['type'] == 'string');
-                })->count() > 0,
+                return ($column['is_primary'] == true) && ($column['type'] == 'string');
+            })->count() > 0,
 
             'resource' => $this->resource,
 
@@ -103,8 +122,19 @@ class Model extends ClassGenerator
     {
         return [
             ['template', 't', InputOption::VALUE_OPTIONAL, 'Specify custom template'],
-            ['belongs-to-many', 'btm', InputOption::VALUE_OPTIONAL, 'Specify belongs to many relations'],
+            ['has-one', 'o', InputOption::VALUE_OPTIONAL, 'Specify has one relations'],
+            ['has-many', 'm', InputOption::VALUE_OPTIONAL, 'Specify has many relations'],
+            ['belongs-to', 'b', InputOption::VALUE_OPTIONAL, 'Specify belongs to relations'],
+            ['belongs-to-many', 'bm', InputOption::VALUE_OPTIONAL, 'Specify belongs to many relations'],
+
+            ['morph-to', 'mt', InputOption::VALUE_OPTIONAL, 'Specify belongs to many relations'],
+            ['morph-one', 'mo', InputOption::VALUE_OPTIONAL, 'Specify belongs to many relations'],
+            ['morph-many', 'mm', InputOption::VALUE_OPTIONAL, 'Specify belongs to many relations'],
+            ['morph-to-many', 'mtm', InputOption::VALUE_OPTIONAL, 'Specify belongs to many relations'],
+            ['morphed-by-many', 'mbm', InputOption::VALUE_OPTIONAL, 'Specify belongs to many relations'],
+
             ['force', 'f', InputOption::VALUE_NONE, 'Force will delete files before regenerating model'],
+            ['translatable', 'trans', InputOption::VALUE_NONE, 'Table has translatable'],
         ];
     }
 

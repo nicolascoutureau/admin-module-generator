@@ -5,7 +5,7 @@
 namespace {{ $modelNameSpace }};
 @php
     $hasRoles = false;
-    if(count($relations) && count($relations['belongsToMany'])) {
+    if(array_key_exists('belongsToMany', $relations) && count($relations['belongsToMany'])) {
         $hasRoles = $relations['belongsToMany']->filter(function($belongsToMany) {
             return $belongsToMany['related_table'] == 'roles';
         })->count() > 0;
@@ -102,7 +102,7 @@ public $incrementing = false;
 @if (count($relations))
 
     /* ************************ RELATIONS ************************ */
-@if (count($relations['belongsToMany']))
+@if (array_key_exists('belongsToMany', $relations) && count($relations['belongsToMany']))
 @foreach($relations['belongsToMany'] as $belongsToMany)/**
     * Relation to {{ $belongsToMany['related_model_name_plural'] }}
     *
@@ -112,5 +112,41 @@ public $incrementing = false;
         return $this->belongsToMany({{ $belongsToMany['related_model_class'] }}, '{{ $belongsToMany['relation_table'] }}', '{{ $belongsToMany['foreign_key'] }}', '{{ $belongsToMany['related_key'] }}');
     }
 @endforeach
+@endif
+
+@if (array_key_exists('belongsTo', $relations) && count($relations['belongsTo']))
+    @foreach($relations['belongsTo'] as $belongsTo)/**
+    * Relation to {{ $belongsTo['related_model_name_plural'] }}
+    *
+    * {{'@'}}return BelongsTo
+    */
+    public function {{ $belongsTo['related_table'] }}() {
+        return $this->belongsTo({{ $belongsTo['related_model_class'] }}, '{{ $belongsTo['foreign_key'] }}', '{{ $belongsTo['owner_key'] }}');
+    }
+    @endforeach
+@endif
+
+@if (array_key_exists('hasOne', $relations) && count($relations['hasOne']))
+    @foreach($relations['hasOne'] as $hasOne)/**
+    * Relation to {{ $hasOne['related_model_name_plural'] }}
+    *
+    * {{'@'}}return hasOne
+    */
+    public function {{ $hasOne['related_table'] }}() {
+    return $this->hasOne({{ $hasOne['related_model_class'] }}, '{{ $hasOne['foreign_key'] }}', '{{ $hasOne['local_key'] }}');
+    }
+    @endforeach
+@endif
+
+@if (array_key_exists('hasMany', $relations) && count($relations['hasMany']))
+    @foreach($relations['hasMany'] as $hasMany)/**
+    * Relation to {{ $hasMany['related_model_name_plural'] }}
+    *
+    * {{'@'}}return hasMany
+    */
+    public function {{ $hasMany['related_table'] }}() {
+    return $this->hasMany({{ $hasMany['related_model_class'] }}, '{{ $hasMany['foreign_key'] }}', '{{ $hasMany['local_key'] }}');
+    }
+    @endforeach
 @endif
 @endif}
