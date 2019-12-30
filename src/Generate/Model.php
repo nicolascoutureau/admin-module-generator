@@ -122,16 +122,17 @@ class Model extends ClassGenerator
     {
         return [
             ['template', 't', InputOption::VALUE_OPTIONAL, 'Specify custom template'],
-            ['has-one', 'o', InputOption::VALUE_OPTIONAL, 'Specify has one relations'],
-            ['has-many', 'm', InputOption::VALUE_OPTIONAL, 'Specify has many relations'],
-            ['belongs-to', 'b', InputOption::VALUE_OPTIONAL, 'Specify belongs to relations'],
-            ['belongs-to-many', 'bm', InputOption::VALUE_OPTIONAL, 'Specify belongs to many relations'],
 
-            ['morph-to', 'mt', InputOption::VALUE_OPTIONAL, 'Specify belongs to many relations'],
-            ['morph-one', 'mo', InputOption::VALUE_OPTIONAL, 'Specify belongs to many relations'],
-            ['morph-many', 'mm', InputOption::VALUE_OPTIONAL, 'Specify belongs to many relations'],
-            ['morph-to-many', 'mtm', InputOption::VALUE_OPTIONAL, 'Specify belongs to many relations'],
-            ['morphed-by-many', 'mbm', InputOption::VALUE_OPTIONAL, 'Specify belongs to many relations'],
+            ['has-one', 'ho', InputOption::VALUE_OPTIONAL, 'Specify has one relations'],
+            ['has-many', 'hm', InputOption::VALUE_OPTIONAL, 'Specify has many relations'],
+            ['belongs-to', 'bt', InputOption::VALUE_OPTIONAL, 'Specify belongs to relations'],
+            ['belongs-to-many', 'btm', InputOption::VALUE_OPTIONAL, 'Specify belongs to many relations'],
+
+            ['morph-to', 'mt', InputOption::VALUE_OPTIONAL, 'Specify morph to relations'],
+            ['morph-one', 'mo', InputOption::VALUE_OPTIONAL, 'Specify morph to many relations'],
+            ['morph-many', 'mm', InputOption::VALUE_OPTIONAL, 'Specify morph many relations'],
+            ['morph-to-many', 'mtm', InputOption::VALUE_OPTIONAL, 'Specify morph to many relations'],
+            ['morphed-by-many', 'mbm', InputOption::VALUE_OPTIONAL, 'Specify morphed by many relations'],
 
             ['force', 'f', InputOption::VALUE_NONE, 'Force will delete files before regenerating model'],
             ['translatable', 'trans', InputOption::VALUE_NONE, 'Table has translatable'],
