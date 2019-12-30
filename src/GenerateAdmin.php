@@ -192,7 +192,7 @@ class GenerateAdmin extends Command
 
     protected function shouldGeneratePermissionsMigration()
     {
-        if (class_exists('\Elifbyte\Craftable\CraftableServiceProvider')) {
+        if (class_exists('\Brackets\Craftable\CraftableServiceProvider')) {
             return true;
         }
 
