@@ -297,6 +297,9 @@ class ViewForm extends ViewGenerator
         return view('elifbyte/admin-module-generator::' . $this->formJs, [
             'modelViewsDirectory' => $this->modelViewsDirectory,
             'modelJSName' => $this->modelJSName,
+            'hasTranslatable' => $this->readColumnsFromTable($this->tableName)->filter(function ($column) {
+                    return ($column['type'] == "json") && ($this->translatable);
+                })->count() > 0,
 
             'columns' => $this->getVisibleColumns($this->tableName, $this->modelVariableName),
         ])->render();
