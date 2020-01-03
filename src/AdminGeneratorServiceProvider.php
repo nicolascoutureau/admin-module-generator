@@ -33,7 +33,7 @@ class AdminGeneratorServiceProvider extends ServiceProvider
             Generate\Export::class,
         ]);
 
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'elifbyte/admin-module-generator');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'elifbyte/admin-module-generator');
     }
 
     /**

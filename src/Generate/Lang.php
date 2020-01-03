@@ -2,7 +2,8 @@
 
 use Symfony\Component\Console\Input\InputOption;
 
-class Lang extends FileAppender {
+class Lang extends FileAppender
+{
 
     /**
      * The name and signature of the console command.
@@ -42,19 +43,19 @@ class Lang extends FileAppender {
 //        //TODO check if exists
 //        //TODO make global for all generator
 //        //TODO also with prefix
-        if(!empty($template = $this->option('template'))) {
-            $this->view = 'templates.'.$template.'.lang';
+        if (!empty($template = $this->option('template'))) {
+            $this->view = 'templates.' . $template . '.lang';
         }
 
-        if(empty($locale = $this->option('locale'))) {
+        if (empty($locale = $this->option('locale'))) {
             $locale = 'en';
         }
 
-        if($this->option('with-export')){
+        if ($this->option('with-export')) {
             $this->export = true;
         }
 
-        if(!empty($belongsToMany = $this->option('belongs-to-many'))) {
+        if (!empty($belongsToMany = $this->option('belongs-to-many'))) {
             $this->setBelongToManyRelation($belongsToMany);
         }
 
@@ -62,13 +63,14 @@ class Lang extends FileAppender {
 
         // TODO name-spaced model names should be probably inserted as a sub-array in a translation file..
 
-        if ($this->replaceIfNotPresent(module_path($this->moduleName, 'Resources/lang/'.$locale.'/admin.php'),  "// Do not delete me :) I'm used for auto-generation".PHP_EOL,$this->buildClass().PHP_EOL, "<?php".PHP_EOL.PHP_EOL."return [".PHP_EOL."    // Do not delete me :) I'm used for auto-generation".PHP_EOL."];")){
+        if ($this->replaceIfNotPresent(module_path($this->moduleName, 'Resources/lang/' . $locale . '/admin.php'), "// Do not delete me :) I'm used for auto-generation" . PHP_EOL, $this->buildClass() . PHP_EOL, "<?php" . PHP_EOL . PHP_EOL . "return [" . PHP_EOL . "    // Do not delete me :) I'm used for auto-generation" . PHP_EOL . "];")) {
             $this->info('Appending translations finished');
         }
     }
 
-    protected function buildClass() {
-        return view('elifbyte/admin-module-generator::'.$this->view, [
+    protected function buildClass()
+    {
+        return view('elifbyte/admin-module-generator::' . $this->view, [
             'modelLangFormat' => $this->modelLangFormat,
             'modelBaseName' => $this->modelBaseName,
             'modelPlural' => $this->modelPlural,
@@ -85,7 +87,8 @@ class Lang extends FileAppender {
         ])->render();
     }
 
-    protected function getOptions() {
+    protected function getOptions()
+    {
         return [
             ['model-name', 'm', InputOption::VALUE_OPTIONAL, 'Generates a controller for the given model'],
             ['locale', 'c', InputOption::VALUE_OPTIONAL, 'Specify custom locale'],

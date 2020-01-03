@@ -11,7 +11,8 @@ use Illuminate\Filesystem\Filesystem;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-abstract class ViewGenerator extends Command {
+abstract class ViewGenerator extends Command
+{
 
     use Helpers, Columns, Names;
 
@@ -30,7 +31,7 @@ abstract class ViewGenerator extends Command {
     /**
      * Create a new controller creator command instance.
      *
-     * @param  \Illuminate\Filesystem\Filesystem  $files
+     * @param \Illuminate\Filesystem\Filesystem $files
      */
     public function __construct(Filesystem $files)
     {
@@ -39,7 +40,8 @@ abstract class ViewGenerator extends Command {
         $this->files = $files;
     }
 
-    protected function getArguments() {
+    protected function getArguments()
+    {
         return [
             ['table_name', InputArgument::REQUIRED, 'Name of the existing table'],
             ['module_name', InputArgument::REQUIRED, 'Name of the existing module'],
@@ -73,8 +75,8 @@ abstract class ViewGenerator extends Command {
     /**
      * Execute the console command.
      *
-     * @param  \Symfony\Component\Console\Input\InputInterface  $input
-     * @param  \Symfony\Component\Console\Output\OutputInterface  $output
+     * @param \Symfony\Component\Console\Input\InputInterface $input
+     * @param \Symfony\Component\Console\Output\OutputInterface $output
      * @return mixed
      */
     protected function execute(InputInterface $input, OutputInterface $output)

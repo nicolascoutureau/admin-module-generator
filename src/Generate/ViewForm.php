@@ -4,7 +4,8 @@ use Elifbyte\AdminGenerator\Generate\Traits\FileManipulations;
 use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputOption;
 
-class ViewForm extends ViewGenerator {
+class ViewForm extends ViewGenerator
+{
 
     use FileManipulations;
 
@@ -57,6 +58,8 @@ class ViewForm extends ViewGenerator {
      */
     protected $formJs = 'form-js';
 
+    protected $translatable = false;
+
     /**
      * Execute the console command.
      *
@@ -65,28 +68,29 @@ class ViewForm extends ViewGenerator {
     public function handle()
     {
         $force = $this->option('force');
+        $translatable = $this->option('translatable');
 
         //TODO check if exists
         //TODO make global for all generator
         //TODO also with prefix
-        if(!empty($template = $this->option('template'))) {
-            $this->create = 'templates.'.$template.'.create';
-            $this->edit = 'templates.'.$template.'.edit';
-            $this->form = 'templates.'.$template.'.form';
-            $this->formRight = 'templates.'.$template.'form-right';
-            $this->formJs = 'templates.'.$template.'.form-js';
+        if (!empty($template = $this->option('template'))) {
+            $this->create = 'templates.' . $template . '.create';
+            $this->edit = 'templates.' . $template . '.edit';
+            $this->form = 'templates.' . $template . '.form';
+            $this->formRight = 'templates.' . $template . 'form-right';
+            $this->formJs = 'templates.' . $template . '.form-js';
         }
 
-        if(!empty($belongsToMany = $this->option('belongs-to-many'))) {
+        if (!empty($belongsToMany = $this->option('belongs-to-many'))) {
             $this->setBelongToManyRelation($belongsToMany);
         }
 
-        $viewPath = module_path($this->moduleName, 'Resources/views/admin/'.$this->modelViewsDirectory.'/components/form-elements.blade.php');
+        $viewPath = module_path($this->moduleName, 'Resources/views/admin/' . $this->modelViewsDirectory . '/components/form-elements.blade.php');
         if ($this->alreadyExists($viewPath) && !$force) {
-            $this->error('File '.$viewPath.' already exists!');
+            $this->error('File ' . $viewPath . ' already exists!');
         } else {
             if ($this->alreadyExists($viewPath) && $force) {
-                $this->warn('File '.$viewPath.' already exists! File will be deleted.');
+                $this->warn('File ' . $viewPath . ' already exists! File will be deleted.');
                 $this->files->delete($viewPath);
             }
 
@@ -94,16 +98,16 @@ class ViewForm extends ViewGenerator {
 
             $this->files->put($viewPath, $this->buildForm());
 
-            $this->info('Generating '.$viewPath.' finished');
+            $this->info('Generating ' . $viewPath . ' finished');
         }
 
-        if(in_array("published_at", array_column($this->getVisibleColumns($this->tableName, $this->modelVariableName)->toArray(), 'name'))){
-            $viewPath = module_path($this->moduleName, 'Resources/views/admin/'.$this->modelViewsDirectory.'/components/form-elements-right.blade.php');
+        if (in_array("published_at", array_column($this->getVisibleColumns($this->tableName, $this->modelVariableName)->toArray(), 'name'))) {
+            $viewPath = module_path($this->moduleName, 'Resources/views/admin/' . $this->modelViewsDirectory . '/components/form-elements-right.blade.php');
             if ($this->alreadyExists($viewPath) && !$force) {
-                $this->error('File '.$viewPath.' already exists!');
+                $this->error('File ' . $viewPath . ' already exists!');
             } else {
                 if ($this->alreadyExists($viewPath) && $force) {
-                    $this->warn('File '.$viewPath.' already exists! File will be deleted.');
+                    $this->warn('File ' . $viewPath . ' already exists! File will be deleted.');
                     $this->files->delete($viewPath);
                 }
 
@@ -111,16 +115,16 @@ class ViewForm extends ViewGenerator {
 
                 $this->files->put($viewPath, $this->buildFormRight());
 
-                $this->info('Generating '.$viewPath.' finished');
+                $this->info('Generating ' . $viewPath . ' finished');
             }
         }
 
-        $viewPath = module_path($this->moduleName, 'Resources/views/admin/'.$this->modelViewsDirectory.'/create.blade.php');
+        $viewPath = module_path($this->moduleName, 'Resources/views/admin/' . $this->modelViewsDirectory . '/create.blade.php');
         if ($this->alreadyExists($viewPath) && !$force) {
-            $this->error('File '.$viewPath.' already exists!');
+            $this->error('File ' . $viewPath . ' already exists!');
         } else {
             if ($this->alreadyExists($viewPath) && $force) {
-                $this->warn('File '.$viewPath.' already exists! File will be deleted.');
+                $this->warn('File ' . $viewPath . ' already exists! File will be deleted.');
                 $this->files->delete($viewPath);
             }
 
@@ -128,16 +132,16 @@ class ViewForm extends ViewGenerator {
 
             $this->files->put($viewPath, $this->buildCreate());
 
-            $this->info('Generating '.$viewPath.' finished');
+            $this->info('Generating ' . $viewPath . ' finished');
         }
 
 
-        $viewPath = module_path($this->moduleName, 'Resources/views/admin/'.$this->modelViewsDirectory.'/edit.blade.php');
+        $viewPath = module_path($this->moduleName, 'Resources/views/admin/' . $this->modelViewsDirectory . '/edit.blade.php');
         if ($this->alreadyExists($viewPath) && !$force) {
-            $this->error('File '.$viewPath.' already exists!');
+            $this->error('File ' . $viewPath . ' already exists!');
         } else {
             if ($this->alreadyExists($viewPath) && $force) {
-                $this->warn('File '.$viewPath.' already exists! File will be deleted.');
+                $this->warn('File ' . $viewPath . ' already exists! File will be deleted.');
                 $this->files->delete($viewPath);
             }
 
@@ -145,35 +149,35 @@ class ViewForm extends ViewGenerator {
 
             $this->files->put($viewPath, $this->buildEdit());
 
-            $this->info('Generating '.$viewPath.' finished');
+            $this->info('Generating ' . $viewPath . ' finished');
         }
 
-        $formJsPath = module_path($this->moduleName, 'Resources/assets/js/admin/'.$this->modelJSName.'/Form.js');
+        $formJsPath = module_path($this->moduleName, 'Resources/assets/js/admin/' . $this->modelJSName . '/Form.js');
 
         if ($this->alreadyExists($formJsPath) && !$force) {
-            $this->error('File '.$formJsPath.' already exists!');
+            $this->error('File ' . $formJsPath . ' already exists!');
         } else {
             if ($this->alreadyExists($formJsPath) && $force) {
-                $this->warn('File '.$formJsPath.' already exists! File will be deleted.');
+                $this->warn('File ' . $formJsPath . ' already exists! File will be deleted.');
                 $this->files->delete($formJsPath);
             }
 
             $this->makeDirectory($formJsPath);
 
             $this->files->put($formJsPath, $this->buildFormJs());
-            $this->info('Generating '.$formJsPath.' finished');
+            $this->info('Generating ' . $formJsPath . ' finished');
         }
 
-		$indexJsPath = module_path($this->moduleName, 'Resources/assets/js/admin/'.$this->modelJSName.'/index.js');
-		$bootstrapJsPath = module_path($this->moduleName, 'Resources/assets/js/admin/index.js');
+        $indexJsPath = module_path($this->moduleName, 'Resources/assets/js/admin/' . $this->modelJSName . '/index.js');
+        $bootstrapJsPath = module_path($this->moduleName, 'Resources/assets/js/admin/index.js');
         $mainJsPath = resource_path('js/admin/index.js');
 
-		if ($this->appendIfNotAlreadyAppended($indexJsPath, "import './Form';".PHP_EOL)){
-			$this->info('Appending Form to '.$indexJsPath.' finished');
-		};
-		if ($this->appendIfNotAlreadyAppended($bootstrapJsPath, "import './".$this->modelJSName."';".PHP_EOL)){
-			$this->info('Appending Form to '.$bootstrapJsPath.' finished');
-		};
+        if ($this->appendIfNotAlreadyAppended($indexJsPath, "import './Form';" . PHP_EOL)) {
+            $this->info('Appending Form to ' . $indexJsPath . ' finished');
+        };
+        if ($this->appendIfNotAlreadyAppended($bootstrapJsPath, "import './" . $this->modelJSName . "';" . PHP_EOL)) {
+            $this->info('Appending Form to ' . $bootstrapJsPath . ' finished');
+        };
         if ($this->appendIfNotAlreadyAppended($mainJsPath, "import '@" . $this->moduleName . "';" . PHP_EOL)) {
             $this->info('Appending ' . $mainJsPath . '/index.js finished');
         };
@@ -188,13 +192,15 @@ class ViewForm extends ViewGenerator {
         }
     }
 
-    protected function isUsedTwoColumnsLayout() : bool {
+    protected function isUsedTwoColumnsLayout(): bool
+    {
         return in_array("published_at", array_column($this->readColumnsFromTable($this->tableName)->toArray(), 'name'));
     }
 
-    protected function buildForm() {
+    protected function buildForm()
+    {
 
-        return view('elifbyte/admin-module-generator::'.$this->form, [
+        return view('elifbyte/admin-module-generator::' . $this->form, [
             'moduleName' => Str::lower($this->moduleName),
             'modelBaseName' => $this->modelBaseName,
             'modelRouteAndViewName' => $this->modelRouteAndViewName,
@@ -202,42 +208,44 @@ class ViewForm extends ViewGenerator {
             'modelDotNotation' => $this->modelDotNotation,
             'modelLangFormat' => $this->modelLangFormat,
 
-            'columns' => $this->getVisibleColumns($this->tableName, $this->modelVariableName)->sortBy(function($column) {
+            'columns' => $this->getVisibleColumns($this->tableName, $this->modelVariableName)->sortBy(function ($column) {
                 return !($column['type'] == "json");
             }),
-            'hasTranslatable' => $this->readColumnsFromTable($this->tableName)->filter(function($column) {
-                return $column['type'] == "json";
-            })->count() > 0,
-            'translatableTextarea' => ['perex', 'text', 'body'],
-            'relations' => $this->relations,
-        ])->render();
-    }
-
-    protected function buildFormRight() {
-
-        return view('elifbyte/admin-module-generator::'.$this->formRight, [
-            'moduleName' => Str::lower($this->moduleName),
-            'modelBaseName' => $this->modelBaseName,
-            'modelRouteAndViewName' => $this->modelRouteAndViewName,
-            'modelPlural' => $this->modelPlural,
-            'modelDotNotation' => $this->modelDotNotation,
-            'modelLangFormat' => $this->modelLangFormat,
-            'modelVariableName' => $this->modelVariableName,
-
-            'columns' => $this->getVisibleColumns($this->tableName, $this->modelVariableName)->sortBy(function($column) {
-                return !($column['type'] == "json");
-            }),
-            'hasTranslatable' => $this->readColumnsFromTable($this->tableName)->filter(function($column) {
-                    return $column['type'] == "json";
+            'hasTranslatable' => $this->readColumnsFromTable($this->tableName)->filter(function ($column) {
+                    return ($column['type'] == "json") && ($this->translatable);
                 })->count() > 0,
             'translatableTextarea' => ['perex', 'text', 'body'],
             'relations' => $this->relations,
         ])->render();
     }
 
-    protected function buildCreate() {
+    protected function buildFormRight()
+    {
 
-        return view('elifbyte/admin-module-generator::'.$this->create, [
+        return view('elifbyte/admin-module-generator::' . $this->formRight, [
+            'moduleName' => Str::lower($this->moduleName),
+            'modelBaseName' => $this->modelBaseName,
+            'modelRouteAndViewName' => $this->modelRouteAndViewName,
+            'modelPlural' => $this->modelPlural,
+            'modelDotNotation' => $this->modelDotNotation,
+            'modelLangFormat' => $this->modelLangFormat,
+            'modelVariableName' => $this->modelVariableName,
+
+            'columns' => $this->getVisibleColumns($this->tableName, $this->modelVariableName)->sortBy(function ($column) {
+                return !($column['type'] == "json");
+            }),
+            'hasTranslatable' => $this->readColumnsFromTable($this->tableName)->filter(function ($column) {
+                    return ($column['type'] == "json") && ($this->translatable);
+                })->count() > 0,
+            'translatableTextarea' => ['perex', 'text', 'body'],
+            'relations' => $this->relations,
+        ])->render();
+    }
+
+    protected function buildCreate()
+    {
+
+        return view('elifbyte/admin-module-generator::' . $this->create, [
             'moduleName' => Str::lower($this->moduleName),
             'modelBaseName' => $this->modelBaseName,
             'modelRouteAndViewName' => $this->modelRouteAndViewName,
@@ -251,16 +259,17 @@ class ViewForm extends ViewGenerator {
             'isUsedTwoColumnsLayout' => $this->isUsedTwoColumnsLayout(),
 
             'columns' => $this->getVisibleColumns($this->tableName, $this->modelVariableName),
-            'hasTranslatable' => $this->readColumnsFromTable($this->tableName)->filter(function($column) {
-                return $column['type'] == "json";
-            })->count() > 0,
+            'hasTranslatable' => $this->readColumnsFromTable($this->tableName)->filter(function ($column) {
+                    return ($column['type'] == "json") && ($this->translatable);
+                })->count() > 0,
         ])->render();
     }
 
 
-    protected function buildEdit() {
+    protected function buildEdit()
+    {
 
-        return view('elifbyte/admin-module-generator::'.$this->edit, [
+        return view('elifbyte/admin-module-generator::' . $this->edit, [
             'moduleName' => Str::lower($this->moduleName),
             'modelBaseName' => $this->modelBaseName,
             'modelRouteAndViewName' => $this->modelRouteAndViewName,
@@ -273,18 +282,19 @@ class ViewForm extends ViewGenerator {
             'resource' => $this->resource,
             'isUsedTwoColumnsLayout' => $this->isUsedTwoColumnsLayout(),
 
-            'modelTitle' => $this->readColumnsFromTable($this->tableName)->filter(function($column){
-            	return in_array($column['name'], ['title', 'name', 'first_name', 'email']);
-            })->first(null, ['name'=>'id'])['name'],
+            'modelTitle' => $this->readColumnsFromTable($this->tableName)->filter(function ($column) {
+                return in_array($column['name'], ['title', 'name', 'first_name', 'email']);
+            })->first(null, ['name' => 'id'])['name'],
             'columns' => $this->getVisibleColumns($this->tableName, $this->modelVariableName),
-            'hasTranslatable' => $this->readColumnsFromTable($this->tableName)->filter(function($column) {
-                return $column['type'] == "json";
-            })->count() > 0,
+            'hasTranslatable' => $this->readColumnsFromTable($this->tableName)->filter(function ($column) {
+                    return ($column['type'] == "json") && ($this->translatable);
+                })->count() > 0,
         ])->render();
     }
 
-    protected function buildFormJs() {
-        return view('elifbyte/admin-module-generator::'.$this->formJs, [
+    protected function buildFormJs()
+    {
+        return view('elifbyte/admin-module-generator::' . $this->formJs, [
             'modelViewsDirectory' => $this->modelViewsDirectory,
             'modelJSName' => $this->modelJSName,
 
@@ -292,7 +302,8 @@ class ViewForm extends ViewGenerator {
         ])->render();
     }
 
-    protected function getOptions() {
+    protected function getOptions()
+    {
         return [
             ['model-name', 'm', InputOption::VALUE_OPTIONAL, 'Generates a code for the given model'],
             ['belongs-to-many', 'btm', InputOption::VALUE_OPTIONAL, 'Specify belongs to many relations'],

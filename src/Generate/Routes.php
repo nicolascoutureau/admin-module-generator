@@ -3,7 +3,8 @@
 use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputOption;
 
-class Routes extends FileAppender {
+class Routes extends FileAppender
+{
 
     /**
      * The name and signature of the console command.
@@ -42,29 +43,30 @@ class Routes extends FileAppender {
 
     public function handle()
     {
-        if($this->option('with-export')){
+        if ($this->option('with-export')) {
             $this->export = true;
         }
 
-        if($this->option('without-bulk')){
+        if ($this->option('without-bulk')) {
             $this->withoutBulk = true;
         }
 
         //TODO check if exists
         //TODO make global for all generator
         //TODO also with prefix
-        if(!empty($template = $this->option('template'))) {
-            $this->view = 'templates.'.$template.'.routes';
+        if (!empty($template = $this->option('template'))) {
+            $this->view = 'templates.' . $template . '.routes';
         }
 
-        if ($this->appendIfNotAlreadyAppended(module_path($this->moduleName,'Routes/web.php'), PHP_EOL.PHP_EOL.$this->buildClass())){
+        if ($this->appendIfNotAlreadyAppended(module_path($this->moduleName, 'Routes/web.php'), PHP_EOL . PHP_EOL . $this->buildClass())) {
             $this->info('Appending routes finished');
         }
     }
 
-    protected function buildClass() {
+    protected function buildClass()
+    {
 
-        return view('elifbyte/admin-module-generator::'.$this->view, [
+        return view('elifbyte/admin-module-generator::' . $this->view, [
             'controllerPartiallyFullName' => $this->controllerWithNamespaceFromDefault,
             'modelVariableName' => $this->modelVariableName,
             'modelViewsDirectory' => $this->modelViewsDirectory,
@@ -74,7 +76,8 @@ class Routes extends FileAppender {
         ])->render();
     }
 
-    protected function getOptions() {
+    protected function getOptions()
+    {
         return [
             ['model-name', 'm', InputOption::VALUE_OPTIONAL, 'Generates a controller for the given model'],
             ['controller-name', 'c', InputOption::VALUE_OPTIONAL, 'Specify custom controller name'],

@@ -78,7 +78,7 @@ class Controller extends ClassGenerator
                 resource_path('views/admin/layout/sidebar.blade.php'),
                 '|url\(\'admin\/' . $this->resource . '\'\)|',
                 "{{-- Do not delete me :) I'm used for auto-generation menu items --}}",
-                "<li class=\"nav-item\"><a class=\"nav-link\" href=\"{{ url('admin/" . $this->resource . "') }}\"><i class=\"nav-icon " . $icon . "\"></i> {{ trans('". strtolower($this->moduleName) ."::admin." . $this->modelLangFormat . ".title') }}</a></li>" . PHP_EOL . "           {{-- Do not delete me :) I'm used for auto-generation menu items --}}"
+                "<li class=\"nav-item\"><a class=\"nav-link\" href=\"{{ url('admin/" . $this->resource . "') }}\"><i class=\"nav-icon " . $icon . "\"></i> {{ trans('" . strtolower($this->moduleName) . "::admin." . $this->modelLangFormat . ".title') }}</a></li>" . PHP_EOL . "           {{-- Do not delete me :) I'm used for auto-generation menu items --}}"
             )) {
                 $this->info('Updating sidebar');
             }

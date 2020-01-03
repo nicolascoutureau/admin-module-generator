@@ -2,7 +2,8 @@
 
 use Symfony\Component\Console\Input\InputOption;
 
-class Permissions extends ClassGenerator {
+class Permissions extends ClassGenerator
+{
 
     /**
      * The name and signature of the console command.
@@ -34,26 +35,27 @@ class Permissions extends ClassGenerator {
     {
         $force = $this->option('force');
 
-        if($this->option('without-bulk')){
+        if ($this->option('without-bulk')) {
             $this->withoutBulk = true;
         }
 
-        if ($this->generateClass($force)){
-            $this->info('Generating permissions for '.$this->modelBaseName.' finished');
+        if ($this->generateClass($force)) {
+            $this->info('Generating permissions for ' . $this->modelBaseName . ' finished');
         }
     }
 
-    protected function generateClass($force = false) {
-        $fileName = 'fill_permissions_for_'.$this->modelRouteAndViewName.'.php';
-        $path = module_path($this->moduleName,'Database/Migrations/'.date('Y_m_d_His', time()).'_'.$fileName);
+    protected function generateClass($force = false)
+    {
+        $fileName = 'fill_permissions_for_' . $this->modelRouteAndViewName . '.php';
+        $path = module_path($this->moduleName, 'Database/Migrations/' . date('Y_m_d_His', time()) . '_' . $fileName);
 
         if ($oldPath = $this->alreadyExists($fileName)) {
             $path = $oldPath;
-            if($force) {
-                $this->warn('File '.$path.' already exists! File will be deleted.');
+            if ($force) {
+                $this->warn('File ' . $path . ' already exists! File will be deleted.');
                 $this->files->delete($path);
             } else {
-                $this->error('File '.$path.' already exists!');
+                $this->error('File ' . $path . ' already exists!');
                 return false;
             }
         }
@@ -73,14 +75,15 @@ class Permissions extends ClassGenerator {
     protected function alreadyExists($path)
     {
         foreach ($this->files->files(module_path($this->moduleName, 'Database/Migrations')) as $file) {
-            if(str_contains($file->getFilename(), $path)) {
+            if (str_contains($file->getFilename(), $path)) {
                 return $file->getPathname();
             }
         }
         return false;
     }
 
-    protected function buildClass() {
+    protected function buildClass()
+    {
 
         return view('elifbyte/admin-module-generator::permissions', [
             'modelBaseName' => $this->modelBaseName,
@@ -90,7 +93,8 @@ class Permissions extends ClassGenerator {
         ])->render();
     }
 
-    protected function getOptions() {
+    protected function getOptions()
+    {
         return [
             ['model-name', 'm', InputOption::VALUE_OPTIONAL, 'Generates a code for the given model'],
             ['force', 'f', InputOption::VALUE_NONE, 'Force will delete files before regenerating request'],
@@ -98,7 +102,8 @@ class Permissions extends ClassGenerator {
         ];
     }
 
-    public function generateClassNameFromTable($tableName) {
-        return 'FillPermissionsFor'.$this->modelBaseName;
+    public function generateClassNameFromTable($tableName)
+    {
+        return 'FillPermissionsFor' . $this->modelBaseName;
     }
 }

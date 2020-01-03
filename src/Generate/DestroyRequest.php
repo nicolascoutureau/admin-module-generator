@@ -2,7 +2,8 @@
 
 use Symfony\Component\Console\Input\InputOption;
 
-class DestroyRequest extends ClassGenerator {
+class DestroyRequest extends ClassGenerator
+{
 
     /**
      * The name and signature of the console command.
@@ -27,12 +28,13 @@ class DestroyRequest extends ClassGenerator {
     {
         $force = $this->option('force');
 
-        if ($this->generateClass($force)){
-            $this->info('Generating '.$this->classFullName.' finished');
+        if ($this->generateClass($force)) {
+            $this->info('Generating ' . $this->classFullName . ' finished');
         }
     }
 
-    protected function buildClass() {
+    protected function buildClass()
+    {
 
         return view('elifbyte/admin-module-generator::destroy-request', [
             'classNamespace' => $this->classNamespace,
@@ -43,26 +45,28 @@ class DestroyRequest extends ClassGenerator {
         ])->render();
     }
 
-    protected function getOptions() {
+    protected function getOptions()
+    {
         return [
             ['model-name', 'm', InputOption::VALUE_OPTIONAL, 'Generates a code for the given model'],
             ['force', 'f', InputOption::VALUE_NONE, 'Force will delete files before regenerating request'],
         ];
     }
 
-    public function generateClassNameFromTable($tableName) {
-        return 'Destroy'.$this->modelBaseName;
+    public function generateClassNameFromTable($tableName)
+    {
+        return 'Destroy' . $this->modelBaseName;
     }
 
     /**
      * Get the default namespace for the class.
      *
-     * @param  string  $rootNamespace
+     * @param string $rootNamespace
      * @return string
      */
     protected function getDefaultNamespace($moduleNamespace)
     {
-        return $moduleNamespace.'\Http\Requests\Admin\\'.$this->modelWithNamespaceFromDefault;
+        return $moduleNamespace . '\Http\Requests\Admin\\' . $this->modelWithNamespaceFromDefault;
     }
 
 }

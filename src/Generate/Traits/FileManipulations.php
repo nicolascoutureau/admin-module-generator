@@ -2,9 +2,11 @@
 
 use Illuminate\Support\Facades\File;
 
-trait FileManipulations {
+trait FileManipulations
+{
 
-    protected function strReplaceInFile($fileName, $ifExistsRegex, $find, $replaceWith) {
+    protected function strReplaceInFile($fileName, $ifExistsRegex, $find, $replaceWith)
+    {
         $content = File::get($fileName);
         if (preg_match($ifExistsRegex, $content)) {
             return;

@@ -103,14 +103,14 @@ class Model extends ClassGenerator
                 return ($column['type'] == "json") && ($this->translatable);
             })->pluck('name'),
             'timestamps' => $this->readColumnsFromTable($this->tableName)->filter(function ($column) {
-                return in_array($column['name'], ['created_at', 'updated_at']);
-            })->count() > 0,
+                    return in_array($column['name'], ['created_at', 'updated_at']);
+                })->count() > 0,
             'hasSoftDelete' => $this->readColumnsFromTable($this->tableName)->filter(function ($column) {
-                return $column['name'] == "deleted_at";
-            })->count() > 0,
+                    return $column['name'] == "deleted_at";
+                })->count() > 0,
             'hasUuid' => $this->readColumnsFromTable($this->tableName)->filter(function ($column) {
-                return ($column['is_primary'] == true) && ($column['type'] == 'string');
-            })->count() > 0,
+                    return ($column['is_primary'] == true) && ($column['type'] == 'string');
+                })->count() > 0,
 
             'resource' => $this->resource,
 

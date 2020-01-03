@@ -56,6 +56,8 @@ class ViewFullForm extends ViewGenerator
      */
     protected $formJsRelativePath;
 
+    protected $translatable = false;
+
     /**
      * Execute the console command.
      *
@@ -64,6 +66,7 @@ class ViewFullForm extends ViewGenerator
     public function handle()
     {
         $force = $this->option('force');
+        $translatable = $this->option('translatable');
 
         //TODO check if exists
         //TODO make global for all generator
@@ -174,7 +177,7 @@ class ViewFullForm extends ViewGenerator
                 return $column['type'] == "json";
             }),
             'hasTranslatable' => $this->readColumnsFromTable($this->tableName)->filter(function ($column) {
-                    return $column['type'] == "json";
+                    return ($column['type'] == "json") && ($this->translatable);
                 })->count() > 0,
             'translatableTextarea' => ['perex', 'text'],
             'relations' => $this->relations,

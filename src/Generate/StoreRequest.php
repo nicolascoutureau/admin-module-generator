@@ -2,7 +2,8 @@
 
 use Symfony\Component\Console\Input\InputOption;
 
-class StoreRequest extends ClassGenerator {
+class StoreRequest extends ClassGenerator
+{
 
     /**
      * The name and signature of the console command.
@@ -25,6 +26,8 @@ class StoreRequest extends ClassGenerator {
      */
     protected $view = 'store-request';
 
+    protected $translatable = false;
+
     /**
      * Execute the console command.
      *
@@ -33,26 +36,28 @@ class StoreRequest extends ClassGenerator {
     public function handle()
     {
         $force = $this->option('force');
+        $translatable = $this->option('translatable');
 
         //TODO check if exists
         //TODO make global for all generator
         //TODO also with prefix
-        if(!empty($template = $this->option('template'))) {
-            $this->view = 'templates.'.$template.'.store-request';
+        if (!empty($template = $this->option('template'))) {
+            $this->view = 'templates.' . $template . '.store-request';
         }
 
-        if(!empty($belongsToMany = $this->option('belongs-to-many'))) {
+        if (!empty($belongsToMany = $this->option('belongs-to-many'))) {
             $this->setBelongToManyRelation($belongsToMany);
         }
 
-        if ($this->generateClass($force)){
-            $this->info('Generating '.$this->classFullName.' finished');
+        if ($this->generateClass($force)) {
+            $this->info('Generating ' . $this->classFullName . ' finished');
         }
     }
 
-    protected function buildClass() {
+    protected function buildClass()
+    {
 
-        return view('elifbyte/admin-module-generator::'.$this->view, [
+        return view('elifbyte/admin-module-generator::' . $this->view, [
             'classNamespace' => $this->classNamespace,
             'modelBaseName' => $this->modelBaseName,
             'modelDotNotation' => $this->modelDotNotation,
@@ -61,14 +66,15 @@ class StoreRequest extends ClassGenerator {
 
             // validation in store/update
             'columns' => $this->getVisibleColumns($this->tableName, $this->modelVariableName),
-            'translatable' => $this->readColumnsFromTable($this->tableName)->filter(function($column) {
-                return $column['type'] == "json";
+            'translatable' => $this->readColumnsFromTable($this->tableName)->filter(function ($column) {
+                return ($column['type'] == "json") && ($this->translatable);
             })->pluck('name'),
             'relations' => $this->relations,
         ])->render();
     }
 
-    protected function getOptions() {
+    protected function getOptions()
+    {
         return [
             ['model-name', 'm', InputOption::VALUE_OPTIONAL, 'Generates a code for the given model'],
             ['template', 't', InputOption::VALUE_OPTIONAL, 'Specify custom template'],
@@ -77,18 +83,19 @@ class StoreRequest extends ClassGenerator {
         ];
     }
 
-    public function generateClassNameFromTable($tableName) {
-        return 'Store'.$this->modelBaseName;
+    public function generateClassNameFromTable($tableName)
+    {
+        return 'Store' . $this->modelBaseName;
     }
 
     /**
      * Get the default namespace for the class.
      *
-     * @param  string  $rootNamespace
+     * @param string $rootNamespace
      * @return string
      */
     protected function getDefaultNamespace($moduleNamespace)
     {
-        return $moduleNamespace.'\Http\Requests\Admin\\'.$this->modelWithNamespaceFromDefault;
+        return $moduleNamespace . '\Http\Requests\Admin\\' . $this->modelWithNamespaceFromDefault;
     }
 }

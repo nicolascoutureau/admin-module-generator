@@ -113,7 +113,7 @@ trait Helpers
      */
     public function setHasRelation($has, $type)
     {
-        $hasRelation = 'has'.$type;
+        $hasRelation = 'has' . $type;
 
         $this->relations[$hasRelation] = collect(explode(',', $has))->filter(function ($hasRelation) {
             return $this->checkRelationTable($hasRelation);
