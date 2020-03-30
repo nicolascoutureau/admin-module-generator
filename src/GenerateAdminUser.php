@@ -1,6 +1,6 @@
-<?php namespace Elifbyte\AdminGenerator;
+<?php namespace Nicolasc\AdminGenerator;
 
-use Elifbyte\AdminGenerator\Generate\Traits\FileManipulations;
+use Nicolasc\AdminGenerator\Generate\Traits\FileManipulations;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
@@ -51,7 +51,7 @@ class GenerateAdminUser extends Command
 
         if (empty($modelOption)) {
             $modelOption = 'AdminUser';
-            $modelWithFullNamespace = 'Elifbyte\AdminAuth\Models\AdminUser';
+            $modelWithFullNamespace = 'Nicolasc\AdminAuth\Models\AdminUser';
         } else {
             $modelWithFullNamespace = null;
         }

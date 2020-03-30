@@ -1,5 +1,5 @@
 {
-  "name": "nicolascoutureau/admin-module-generator",
+  "name": "nicolasc/admin-module-generator",
   "description": "Laravel 5 CRUD generator with nwidart/module for brackets/craftable",
   "keywords": [
     "generator",
@@ -37,18 +37,18 @@
   "autoload": {
     "classmap": [],
     "psr-4": {
-      "Elifbyte\\AdminGenerator\\": "src/"
+      "Nicolasc\\AdminGenerator\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Elifbyte\\AdminGenerator\\Tests\\": "tests/"
+      "Nicolasc\\AdminGenerator\\Tests\\": "tests/"
     }
   },
   "extra": {
     "laravel": {
       "providers": [
-        "Elifbyte\\AdminGenerator\\AdminGeneratorServiceProvider"
+        "Nicolasc\\AdminGenerator\\AdminGeneratorServiceProvider"
       ]
     }
   }

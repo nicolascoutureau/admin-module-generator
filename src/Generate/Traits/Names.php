@@ -1,7 +1,7 @@
-<?php namespace Elifbyte\AdminGenerator\Generate\Traits;
+<?php namespace Nicolasc\AdminGenerator\Generate\Traits;
 
-use Elifbyte\AdminGenerator\Generate\Controller;
-use Elifbyte\AdminGenerator\Generate\Model;
+use Nicolasc\AdminGenerator\Generate\Controller;
+use Nicolasc\AdminGenerator\Generate\Model;
 use Illuminate\Support\Str;
 
 trait Names

@@ -1,8 +1,8 @@
-<?php namespace Elifbyte\AdminGenerator\Generate;
+<?php namespace Nicolasc\AdminGenerator\Generate;
 
-use Elifbyte\AdminGenerator\Generate\Traits\Helpers;
-use Elifbyte\AdminGenerator\Generate\Traits\Names;
-use Elifbyte\AdminGenerator\Generate\Traits\Columns;
+use Nicolasc\AdminGenerator\Generate\Traits\Helpers;
+use Nicolasc\AdminGenerator\Generate\Traits\Names;
+use Nicolasc\AdminGenerator\Generate\Traits\Columns;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Illuminate\Filesystem\Filesystem;

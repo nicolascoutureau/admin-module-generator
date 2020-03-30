@@ -1,6 +1,6 @@
-<?php namespace Elifbyte\AdminGenerator\Generate;
+<?php namespace Nicolasc\AdminGenerator\Generate;
 
-use Elifbyte\AdminGenerator\Generate\Traits\FileManipulations;
+use Nicolasc\AdminGenerator\Generate\Traits\FileManipulations;
 use Illuminate\Support\Str;
 use Illuminate\Support\Arr;
 use Symfony\Component\Console\Input\InputOption;

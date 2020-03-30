@@ -1,6 +1,6 @@
 <?php
 
-namespace Elifbyte\AdminGenerator\Generate;
+namespace Nicolasc\AdminGenerator\Generate;
 
 use Symfony\Component\Console\Input\InputOption;
 

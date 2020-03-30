@@ -1,4 +1,4 @@
-<?php namespace Elifbyte\AdminGenerator\Generate\Traits;
+<?php namespace Nicolasc\AdminGenerator\Generate\Traits;
 
 use Illuminate\Support\Facades\File;
 

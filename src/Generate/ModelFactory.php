@@ -1,4 +1,4 @@
-<?php namespace Elifbyte\AdminGenerator\Generate;
+<?php namespace Nicolasc\AdminGenerator\Generate;
 
 use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputOption;
@@ -59,7 +59,7 @@ class ModelFactory extends FileAppender
     protected function buildClass()
     {
 
-        return view('elifbyte/admin-module-generator::' . $this->view, [
+        return view('nicolasc/admin-module-generator::' . $this->view, [
             'modelFullName' => $this->modelFullName,
 
             'columns' => $this->readColumnsFromTable($this->tableName)

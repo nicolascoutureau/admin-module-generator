@@ -1,4 +1,4 @@
-<?php namespace Elifbyte\AdminGenerator\Generate;
+<?php namespace Nicolasc\AdminGenerator\Generate;
 
 use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputOption;

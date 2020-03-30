@@ -1,4 +1,4 @@
-<?php namespace Elifbyte\AdminGenerator;
+<?php namespace Nicolasc\AdminGenerator;
 
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;

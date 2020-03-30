@@ -1,6 +1,6 @@
 <?php
 
-namespace Elifbyte\AdminGenerator\Generate\Traits;
+namespace Nicolasc\AdminGenerator\Generate\Traits;
 
 use Ramsey\Uuid\Uuid as Generator;
 use Ramsey\Uuid\Exception\UnsatisfiedDependencyException;

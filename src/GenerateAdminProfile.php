@@ -1,6 +1,6 @@
-<?php namespace Elifbyte\AdminGenerator;
+<?php namespace Nicolasc\AdminGenerator;
 
-use Elifbyte\AdminGenerator\Generate\Traits\FileManipulations;
+use Nicolasc\AdminGenerator\Generate\Traits\FileManipulations;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Symfony\Component\Console\Input\InputArgument;
